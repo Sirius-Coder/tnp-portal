@@ -1,0 +1,23 @@
+{
+  "name": "portal",
+  "version": "1.0.0",
+  "description": "Placement Portal website for RGIPT",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Saumitra Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.2",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7"
+  }
+}
