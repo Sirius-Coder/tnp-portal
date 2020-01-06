@@ -56,11 +56,11 @@ if(user.isModified('password'))
 bcrypt.genSalt(SALT,function(err,salt){
   if(err)
   console.log('An error occured while genereating salt');
-
-  bcrypt.hash(user.password.plaintext,salt,function(err,hash){    // Use user.password.plaintext instead of user.password otherwise it will not work . Don't know why But its important to note
+console.log('now hashing Starts');
+  bcrypt.hash(user.password,salt,function(err,hash){    // Use user.password.plaintext instead of user.password otherwise it will not work . Don't know why But its important to note
     if(err)
     return console.log('an error occured while generating hash');
-    user.password.plaintext=hash;
+    user.password=hash;
     next();
   })
 })
@@ -72,7 +72,7 @@ else {
 
 // comparing Passwords with login
 Schema.methods.comparePasswords=function(enteredPassword,CheckPassword){
-
+console.log(enteredPassword+this.password);
   bcrypt.compare(enteredPassword,this.password,function(err,isMatch){
     if(err)
     return CheckPassword(err)

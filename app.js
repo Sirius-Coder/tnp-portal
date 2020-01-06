@@ -5,10 +5,18 @@ const morgan = require('morgan');
 const path = require('path');
 const model = require('./models/user')
 const bodyParser=require('body-parser')
+var sessions=require('client-sessions')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
+//Intialising the Session Handler Middleware
+app.use(sessions({
+  cookieName:'session',
+  secret:'dasvaudbviufbuijfba',
+  duration:30*60*1000,
+  activeDuration:1000*60*5
 
+}))
 
 app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname,'/public')))
@@ -20,6 +28,36 @@ app.get('/',(req,res)=>{
 app.get('/login',(req,res)=>{
   res.render('login')
 })
+app.use((req,res,next)=>{
+  if(req.session&&req.session.user){
+    model.findOne({username:req.session.user.username},(err,response)=>{
+      if(response)
+      {
+        req.user=response;
+        delete req.user.password; // delete the password from the session
+          req.session.user = response;  //refresh the session value
+          res.locals.user = response;
+
+      }
+next();
+    })
+  }
+  else {
+    next();
+  }
+})
+//requirelogin function to check whether the user is still logged in or not to prevent from directly accessing the Database
+requireLogin=(req,res,next)=>{
+  if(!req.user)
+  res.redirect('/')
+  else {
+    next();
+  }
+}
+app.get('/dashboard',requireLogin,(req,res)=>{
+  res.render('dashboard',{username:req.session.user.username})
+})
+
 
 app.get('/signup',(req,res)=>{
   res.render('signup')
@@ -39,7 +77,7 @@ app.post('/signup',(req,res)=>{
     if(err)
     res.status(400).send('Signup Failed'+err)
 else {
-    res.status(200).send('Signup Succesfully'+response)}
+    res.status(200).send('Succesfully'+response)}
   })
 })
 
@@ -47,6 +85,7 @@ app.post('/login',(req,res)=>{
   model.findOne({username:req.body.username},(err,response)=>{
     if(!response){
     res.json({message:'<h1>Login failed ,User not Found</h1>'})
+    res.redirect('/login')
 
 }
 
@@ -55,14 +94,20 @@ app.post('/login',(req,res)=>{
       throw(err)
       if(!isMatch)
       res.status(400).json({message:"Wrong Password"})
-      if(isMatch)
-      res.status(200).send('<h1>Logged in Succesfully</h1>')
+      if(isMatch){
+        req.session.user=response;
+        res.redirect('/dashboard')
+
+    }
     })
 
   }) })
 
-
-
+//Logout Path
+app.get('/logout',(req,res)=>{
+  res.session.reset();
+  res.redirect('/')
+})
 
 
 
