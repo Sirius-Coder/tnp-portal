@@ -6,6 +6,7 @@ const path = require('path');
 const model = require('./models/user')
 const bodyParser=require('body-parser')
 var sessions=require('client-sessions')
+var hash=require('./routes/hash')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -34,7 +35,7 @@ app.use((req,res,next)=>{
       if(response)
       {
         req.user=response;
-        delete req.user.password; // delete the password from the session
+        // delete req.user.password; // delete the password from the session
           req.session.user = response;  //refresh the session value
           res.locals.user = response;
 
@@ -102,10 +103,34 @@ app.post('/login',(req,res)=>{
     })
 
   }) })
+//Update Password Route
+app.get('/dashboard/changepw',(req,res)=>{
+  res.render('sub/changepw')
+})
+var newpass
+app.post('/dashboard/changepw',(req,res)=>{
+if(!req.body.currentpass==req.session.user.password)
+res.json({message:'<h1> The entered password does not match</h1>'})
+
+hash.hash(req.body.newpass).then(function(result){
+  console.log( result.hash)
+  newpass=result.hash;
+})
+setTimeout( ()=>{ model.findOneAndUpdate({"username":req.session.user.username},{$set:{"password":newpass,"confpassword":req.body.newpass}},{new:true},(err,response)=>{
+    if(err)
+    console.log('An error occured while finding and updating the document');
+if(response){
+  console.log(response);
+res.redirect('/dashboard')
+}
+})} ,500)
+
+})
+
 
 //Logout Path
 app.get('/logout',(req,res)=>{
-  res.session.reset();
+  req.session.reset();
   res.redirect('/')
 })
 

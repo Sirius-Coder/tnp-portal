@@ -79,7 +79,13 @@ console.log(enteredPassword+this.password);
     CheckPassword(null,isMatch)
   })
 }
-
+exports.hash =function(password){
+  bcrypt.hash(password,salt,function(err,hash){
+    if(err)
+    throw err
+return hash
+  })
+}
 
 
 

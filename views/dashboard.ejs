@@ -3,9 +3,45 @@
   <head>
     <meta charset="utf-8">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
   </head>
   <body>
-    <h1>Welcome to the Dashboard <%- username %> </h1>
+    <div class="main-container">
 
+    <div class="welcome-message">
+      <h1>Welcome to the Dashboard ||<%- username %>|| </h1>
+    </div>
+
+
+<div class="middle">
+  <div class="menu">
+    <li class="item" id="profile">
+<a href="#profile" class="btn"><i class="fas fa-user"></i>Profile</a>
+<div class="smenu">
+  <a href="#">Upload your Resume</a>
+  <a href="#">Enter your Details</a>
+</div>
+    </li>
+
+    <li class="item" id="announce">
+<a href="#announce" class="btn"><i class="fas fa-envelope"></i>Announcement</a>
+<div class="smenu">
+  <a href="#">Check For New </a>
+</div>
+    </li>
+    <li class="item" id="settings">
+<a href="#settings" class="btn"><i class="fas fa-cog"></i>Settings</a>
+<div class="smenu">
+  <a href="/dashboard/changepw">Change Password</a>
+</div>
+    </li>
+
+    <li class="item">
+      <a href="/logout" class="btn"><i class="fas fa-sign-out-alt"></i>Logout</a>
+</li>
+</div>
+</div>
+</div>
   </body>
 </html>
