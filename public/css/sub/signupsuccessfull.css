@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html ,body{
+margin:0;
+padding:0;
+height:100%;
+width:100%;
+}
+.main-container{
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  background-color:#031408;
+}
+
+.main-container .inner{
+  display: table-cell;
+  vertical-align: middle;
+  width:100%;
+  max-width: none;
+}
+
+h1{
+ font-family:'Raleway',sans-serif;
+ color:#F9F3F4;
+ text-shadow:0px 0px 300px #000;
+ font-size: 500%;
+}
+.btn{
+ border-radius: 9px;
+ font-family: 'Roboto',sans-serif;
+ color: #036AB1;
+ font-size: 135%;
+ padding: 10px 20px;
+ border : solid #036AB1 3px;
+ text-transform: uppercase;
+ text-decoration: none;
+ text-align: right;
+}
+.btn:hover{
+ color: #fff;
+ border: solid #fff 3px;
+}

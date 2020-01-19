@@ -7,6 +7,7 @@ const model = require('./models/user')
 const bodyParser=require('body-parser')
 var sessions=require('client-sessions')
 var hash=require('./routes/hash')
+const multer = require('multer')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -21,11 +22,41 @@ app.use(sessions({
 
 app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname,'/public')))
+//Setting up Multer
+//Setting Up Storage Engine
+const storage=multer.diskStorage({
+  destination:'./public/uploads/',
+  filename:function(req,file,cb){
+    cb(null,file.fieldname +'-'+req.session.user.name+ path.extname(file.originalname))
+  }
+})
+//Setting Up the upload Engine
+const upload=multer({
+  storage:storage,
+  limits:{filesize:10000000},
+  fileFilter:(req,file,cb)=>{
+    checkFileType(file,cb)
+  }
 
+}).single('resume')
+//Checking FileType
+checkFileType=(file,cb)=>{
+  const fileTypes= /pdf/;
+  const extname =fileTypes.test(path.extname(file.originalname).toLowerCase());
+  const mimetype=fileTypes.test(file.mimetype)
+
+  if(extname&&mimetype)
+  {
+    return cb(null,true)
+  }else {
+    cb("Eror: PDFs only")
+  }
+}
+//HOMEPAGE Route
 app.get('/',(req,res)=>{
   res.sendFile('C:/Users/acer/Desktop/Portal/views/index.html')
 })
-
+//Login Route
 app.get('/login',(req,res)=>{
   res.render('login')
 })
@@ -78,7 +109,7 @@ app.post('/signup',(req,res)=>{
     if(err)
     res.status(400).send('Signup Failed'+err)
 else {
-    res.status(200).send('Succesfully'+response)}
+    res.status(200).render('sub/Signupsuccesfull')}
   })
 })
 
@@ -126,8 +157,35 @@ res.redirect('/dashboard')
 })} ,500)
 
 })
+//Upload Your Resume Route
+app.get('/dashboard/upload',(req,res)=>{
+  res.render('sub/upload')
+})
 
+app.post('/dashboard/upload',(req,res)=>{
+  upload(req,res,(err)=>{
+    if(err)
+    {
+      console.log(err);
+    res.render('sub/upload',{
+      msg:err
+    });
+  }
+    else {
+        if(req.file===undefined)
+        {
+          res.render('sub/upload',{
+            msg:'Error: No File Selected '
+          })
+        }else {
+          res.render('sub/upload',{
+            msg:'Resume Uploaded Succesfully '
+          })
+        }
+    }
+  })
 
+})
 //Logout Path
 app.get('/logout',(req,res)=>{
   req.session.reset();

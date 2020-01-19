@@ -2,7 +2,7 @@ var bcrypt=require('bcryptjs')
 let SALT=10
 // exports.hash=function(password){
 //
-//   bcrypt.genSalt(SALT,(err,salt)=>{
+//   bcrypt.genSalt(SALT,(err,salt)=>{                //Asynchronous function requires promises to return values..therefore wrong method
 //     if(err)
 //     throw error;
 //     bcrypt.hash(password,salt,(err,hash)=>{
@@ -23,7 +23,7 @@ function hash(password) {
                 reject(err);
             }
             else {
-            
+
                 resolve({
                     salt:SALT,
                     password:password,

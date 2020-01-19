@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Upload your Resume </title>
+    <link rel="stylesheet" href="/css/sub/upload.css">
+  </head>
+  <body>
+    <div class="main-container ">
+      <div class="heading">
+        <h1>Upload Your Resume Here</h1>
+        <%= typeof msg!= 'undefined' ? msg:'' %>
+      </div>
+      <form class="" action="/dashboard/upload" method="post" enctype="multipart/form-data">
+        <div class="form-data">
+          <input type="file" name="resume" placeholder="PDF only , less than 400Kb">
+
+        </div>
+        <button type="submit" name="button" class="btn">Submit</button>
+      </form>
+    <a class="back-link" href="/dashboard">Back to Dashboard</a>
+    </div>
+  </body>
+</html>
