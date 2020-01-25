@@ -10,24 +10,30 @@
     <div class="main-container">
 
     <div class="welcome-message">
-      <h1>Welcome to the Dashboard ||<%- username %>|| </h1>
+      <h1>Welcome to the Dashboard ||<%- name %>|| </h1>
     </div>
 
 
 <div class="middle">
+  <div class="dp">
+    <img src="..logo.jpg" alt="Please upload your Profile Pic">
+      <br>
+  </div>
+  <br>
   <div class="menu">
     <li class="item" id="profile">
 <a href="#profile" class="btn"><i class="fas fa-user"></i>Profile</a>
 <div class="smenu">
   <a href="/dashboard/upload">Upload your Resume</a>
   <a href="#">Enter your Details</a>
+  <a href="/dashboard/uploadimg">Upload Your Profile Picture </a>
 </div>
     </li>
 
     <li class="item" id="announce">
 <a href="#announce" class="btn"><i class="fas fa-envelope"></i>Announcement</a>
 <div class="smenu">
-  <a href="#">Check For New </a>
+  <a href="/dashboard/announcement">Check For New </a>
 </div>
     </li>
     <li class="item" id="settings">
@@ -43,5 +49,6 @@
 </div>
 </div>
 </div>
+
   </body>
 </html>

@@ -8,24 +8,26 @@ font-family: 'Roboto';
   font-weight: lighter;
 }
 body{
-background-color:#ecf0f1
+background-color:#eccc68;
 }
 .main-container{
 
-  justify-content: center;
+
+  border: 1px red solid;
 }
 .welcome-message{
 
 position: absolute;
+border: 1px red solid;
 
 left:35%;
 }
  .middle{
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 10%;
   transform: translate(-50%,-50%);
-
+border: 1px red solid;
 }
 .menu{
   width: 300px;
@@ -88,4 +90,18 @@ opacity: 1;
 .item:target .smenu{
   max-height: 10em;
 
+}
+.dp{
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+  top: 1%;
+  border: 1px red solid;
+
+}
+.dp img{
+  width:100%;
+  height:auto;
 }

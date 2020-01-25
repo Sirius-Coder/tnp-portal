@@ -24,24 +24,35 @@ app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname,'/public')))
 //Setting up Multer
 //Setting Up Storage Engine
-const storage=multer.diskStorage({
+const storage1=multer.diskStorage({
   destination:'./public/uploads/',
   filename:function(req,file,cb){
     cb(null,file.fieldname +'-'+req.session.user.name+ path.extname(file.originalname))
   }
 })
-//Setting Up the upload Engine
-const upload=multer({
-  storage:storage,
+const storage=multer.diskStorage({
+  destination:'./public/uploads/',
+  filename:function(req,file,cb){
+    cb(null,file.fieldname +path.extname(file.originalname))
+  }
+})
+//Setting Up the upload Engine for resume
+const upload1=multer({
+  storage:storage1,
   limits:{filesize:10000000},
   fileFilter:(req,file,cb)=>{
     checkFileType(file,cb)
   }
-
 }).single('resume')
+// Setting up the upload engine for the image uploading routes
+const upload=multer({
+  storage:storage,
+  limits:{filesize:10000000},
+  
+}).single('image')
 //Checking FileType
 checkFileType=(file,cb)=>{
-  const fileTypes= /pdf/;
+  const fileTypes= /pdf|jpg/;
   const extname =fileTypes.test(path.extname(file.originalname).toLowerCase());
   const mimetype=fileTypes.test(file.mimetype)
 
@@ -87,7 +98,7 @@ requireLogin=(req,res,next)=>{
   }
 }
 app.get('/dashboard',requireLogin,(req,res)=>{
-  res.render('dashboard',{username:req.session.user.username})
+  res.render('dashboard',{name:req.session.user.name})
 })
 
 
@@ -163,7 +174,7 @@ app.get('/dashboard/upload',(req,res)=>{
 })
 
 app.post('/dashboard/upload',(req,res)=>{
-  upload(req,res,(err)=>{
+  upload1(req,res,(err)=>{
     if(err)
     {
       console.log(err);
@@ -186,6 +197,36 @@ app.post('/dashboard/upload',(req,res)=>{
   })
 
 })
+//Upload your Profile pic routes
+app.get('/dashboard/uploadimg',(req,res)=>{
+  res.render('sub/uploadimg')
+})
+app.post('/dashboard/uploadimg',(req,res)=>{
+  upload(req,res,(err)=>{
+    if(err){
+      res.render('sub/uploadimg',{
+        msg:err
+      })
+    }else {
+      if(req.file==undefined)
+      res.render('sub/uploadimg',{
+        msg:'Error : No file Selected why'
+
+      })
+      else {
+        res.render('sub/uploadimg',{
+          msg:'Photo Uploaded Succesfully'
+        })
+      }
+    }
+  })
+})
+//announcement routes
+app.get('/dashboard/announcement',(req,res)=>{
+  res.render('sub/announcement')
+})
+
+
 //Logout Path
 app.get('/logout',(req,res)=>{
   req.session.reset();
