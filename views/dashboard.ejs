@@ -16,7 +16,7 @@
 
 <div class="middle">
   <div class="dp">
-    <img src="..logo.jpg" alt="Please upload your Profile Pic">
+    <img src="<%=image %>" alt="Please upload your Profile Pic" />
       <br>
   </div>
   <br>
@@ -25,7 +25,7 @@
 <a href="#profile" class="btn"><i class="fas fa-user"></i>Profile</a>
 <div class="smenu">
   <a href="/dashboard/upload">Upload your Resume</a>
-  <a href="#">Enter your Details</a>
+  <a href="/dashboard/details">Enter your Details</a>
   <a href="/dashboard/uploadimg">Upload Your Profile Picture </a>
 </div>
     </li>
@@ -49,6 +49,6 @@
 </div>
 </div>
 </div>
-
+<h1>My Cpi is <%=typeof cpi%> </h1>
   </body>
 </html>

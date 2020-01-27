@@ -4,6 +4,7 @@ app.set('view engine','ejs')
 const morgan = require('morgan');
 const path = require('path');
 const model = require('./models/user')
+const queryString=require('query-string')
 const bodyParser=require('body-parser')
 var sessions=require('client-sessions')
 var hash=require('./routes/hash')
@@ -48,7 +49,7 @@ const upload1=multer({
 const upload=multer({
   storage:storage,
   limits:{filesize:10000000},
-  
+
 }).single('image')
 //Checking FileType
 checkFileType=(file,cb)=>{
@@ -98,7 +99,19 @@ requireLogin=(req,res,next)=>{
   }
 }
 app.get('/dashboard',requireLogin,(req,res)=>{
-  res.render('dashboard',{name:req.session.user.name})
+  const prof=require('./routes/profile')
+  prof.findOne({username:req.session.user.username},(err,response)=>{
+    if(err)
+    console.log('Unable to find the aforementioned username');
+    console.log('Username Found the 2nd Database is up and running');
+    req.session.userDetails=response
+    console.log(req.session.userDetails);
+  })
+  setTimeout(()=>{
+    res.render('dashboard',{name:req.session.user.name,
+    image:'/uploads/image.jpg',
+    cpi:req.session.userDetails})
+  },800)
 })
 
 
@@ -225,8 +238,28 @@ app.post('/dashboard/uploadimg',(req,res)=>{
 app.get('/dashboard/announcement',(req,res)=>{
   res.render('sub/announcement')
 })
-
-
+//Complete OYur Profile routes
+app.get('/dashboard/details',(req,res)=>{
+res.sendFile('C:/Users/acer/Desktop/Portal/views/sub/details.html')
+})
+app.post('/dashboard/details',(req,res)=>{
+  const profile=require('./routes/profile')
+  var details=new profile({
+    cpi:req.body.cpi,
+    Internexp:req.body.Internexp,
+    Internchoice:req.body.Internchoice,
+    username:req.session.user.username
+  })
+  details.save((err,response)=>{
+    if(err){
+      res.json({msg:'Unable to Save User details'})
+    }
+    else {
+    console.log('The Information about the user has been saved');
+    }
+  })
+  res.redirect('/dashboard')
+})
 //Logout Path
 app.get('/logout',(req,res)=>{
   req.session.reset();
