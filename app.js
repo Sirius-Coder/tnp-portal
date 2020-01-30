@@ -9,6 +9,7 @@ const bodyParser=require('body-parser')
 var sessions=require('client-sessions')
 var hash=require('./routes/hash')
 const multer = require('multer')
+const mongoose=require('mongoose')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -90,6 +91,7 @@ next();
     next();
   }
 })
+
 //requirelogin function to check whether the user is still logged in or not to prevent from directly accessing the Database
 requireLogin=(req,res,next)=>{
   if(!req.user)
@@ -99,19 +101,13 @@ requireLogin=(req,res,next)=>{
   }
 }
 app.get('/dashboard',requireLogin,(req,res)=>{
-  const prof=require('./routes/profile')
-  prof.findOne({username:req.session.user.username},(err,response)=>{
-    if(err)
-    console.log('Unable to find the aforementioned username');
-    console.log('Username Found the 2nd Database is up and running');
-    req.session.userDetails=response
-    console.log(req.session.userDetails);
-  })
-  setTimeout(()=>{
-    res.render('dashboard',{name:req.session.user.name,
+
+    res.render('dashboard',{
+      name:req.session.user.name,
     image:'/uploads/image.jpg',
-    cpi:req.session.userDetails})
-  },800)
+    cpi:req.session.user.cpi,
+  Internexp:req.session.user.Internexp,
+Internchoice:req.session.user.Internchoice})
 })
 
 
@@ -243,22 +239,14 @@ app.get('/dashboard/details',(req,res)=>{
 res.sendFile('C:/Users/acer/Desktop/Portal/views/sub/details.html')
 })
 app.post('/dashboard/details',(req,res)=>{
-  const profile=require('./routes/profile')
-  var details=new profile({
-    cpi:req.body.cpi,
-    Internexp:req.body.Internexp,
-    Internchoice:req.body.Internchoice,
-    username:req.session.user.username
-  })
-  details.save((err,response)=>{
-    if(err){
-      res.json({msg:'Unable to Save User details'})
-    }
-    else {
-    console.log('The Information about the user has been saved');
-    }
-  })
-  res.redirect('/dashboard')
+  model.findOneAndUpdate({"username":req.session.user.username},{$set:{"cpi":req.body.cpi,"Internexp":req.body.Internexp,"Internchoice":req.body.Internchoice}},{new:true},(err,response)=>{
+    if(err)
+    console.log('An error occured while adding user information'+err);
+    if(response){
+    console.log('The new updated information abou the user is '+response);
+    res.redirect('/dashboard')
+  }})
+
 })
 //Logout Path
 app.get('/logout',(req,res)=>{
@@ -266,13 +254,7 @@ app.get('/logout',(req,res)=>{
   res.redirect('/')
 })
 
-
-
-
-
-
-
-
+//Connecting to The Server
 app.listen(8080,()=>{
   console.log('Succesfully connected to Port 8080');
 })

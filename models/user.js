@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var bcrypt=require('bcryptjs')
 let SALT=10;
-mongoose.connect('mongodb://localhost:27017/Portal')
+mongoose.connect('mongodb://localhost:27017/Portal',{useNewUrlParser: true})
 const db =mongoose.connection
 db.once('open',()=>{
   console.log('Database Connection Established');
@@ -9,6 +9,8 @@ db.once('open',()=>{
 db.on('error',(err)=>{
   console.error(err);
 })
+
+
 //Creating the Schema
 const Schema = new mongoose.Schema({
   name:{
@@ -30,6 +32,18 @@ const Schema = new mongoose.Schema({
     createdAt: {
       type: Date,
       default: Date.now()
+    },
+    cpi:{
+      type:Number,
+      default:0
+    },
+    Internexp:{
+      type:String,
+      default:'Not Entered'
+    },
+    Internchoice:{
+      type:String,
+      default:'Not Entered'
     }
 })
 //Creating the pre save functionalities
@@ -90,7 +104,23 @@ return hash
 
 
 
+Schema.methods.getDetails=function(){
+  const details={
+    cpi:this.cpi,
+    Interexp:this.Internexp,
+    Interchoice:this.Internchoice,
+    username:this.username
+  }
+
+  return details;
+
+}
+
+
+
+
 
 var model=mongoose.model('model',Schema);
+
 
 module.exports=model;

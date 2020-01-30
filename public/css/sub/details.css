@@ -25,6 +25,7 @@ h2 small {
 /* form starting stylings ------------------------------- */
 .group 			  {
   position:relative;
+  left:50px;
   margin-bottom:45px;
 }
 input 				{
@@ -44,7 +45,7 @@ label 				 {
   font-weight:normal;
   position:absolute;
   pointer-events:none;
-  left:5px;
+  left:10px;
   top:10px;
   transition:0.2s ease all;
   -moz-transition:0.2s ease all;

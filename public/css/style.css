@@ -28,7 +28,7 @@ html , body{
   max-width: 700px;
   margin:0 auto;
   text-align:center;
-  
+
 }
 .content h1{
   font-family:'Raleway',sans-serif;
@@ -68,4 +68,12 @@ html , body{
 img{
   width: 200px;
   height: 220px;
+}
+.transition-fade{
+  opacity: 1;
+  transition: 0.9s;
+  transform-origin: bottom;
+}
+html.is-animating .transition-fade{
+  opacity:0;
 }

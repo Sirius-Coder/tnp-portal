@@ -8,7 +8,8 @@ font-family: 'Roboto';
   font-weight: lighter;
 }
 body{
-background-color:#eccc68;
+background-image:url("../back1.jpg");
+
 }
 .main-container{
 
@@ -95,13 +96,21 @@ opacity: 1;
   position: relative;
   width: 200px;
   height: 200px;
-  overflow: hidden;
+  overflow:hidden;
   border-radius: 50%;
   top: 1%;
   border: 1px red solid;
+  display: flex;
 
 }
 .dp img{
   width:100%;
   height:auto;
+  flex-shrink: 0;
+}
+.user-info{
+  position: absolute;
+  top:100px;
+  left:30px;
+  border:1px red solid;
 }
