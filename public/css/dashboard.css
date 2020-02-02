@@ -89,7 +89,7 @@ border: 1px red solid;
 opacity: 1;
 }
 .item:target .smenu{
-  max-height: 10em;
+  max-height: 14em;
 
 }
 .dp{

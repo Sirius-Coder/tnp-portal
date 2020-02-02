@@ -10,6 +10,7 @@ var sessions=require('client-sessions')
 var hash=require('./routes/hash')
 const multer = require('multer')
 const mongoose=require('mongoose')
+const profile=require('./routes/download-handler')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
@@ -38,6 +39,7 @@ const storage=multer.diskStorage({
     cb(null,file.fieldname +path.extname(file.originalname))
   }
 })
+
 //Setting Up the upload Engine for resume
 const upload1=multer({
   storage:storage1,
@@ -236,18 +238,36 @@ app.get('/dashboard/announcement',(req,res)=>{
 })
 //Complete OYur Profile routes
 app.get('/dashboard/details',(req,res)=>{
-res.sendFile('C:/Users/acer/Desktop/Portal/views/sub/details.html')
+res.sendFile('sub/details.html',{root:path.join(__dirname,'views')})
 })
 app.post('/dashboard/details',(req,res)=>{
   model.findOneAndUpdate({"username":req.session.user.username},{$set:{"cpi":req.body.cpi,"Internexp":req.body.Internexp,"Internchoice":req.body.Internchoice}},{new:true},(err,response)=>{
     if(err)
     console.log('An error occured while adding user information'+err);
     if(response){
-    console.log('The new updated information abou the user is '+response);
+    console.log('The new updated information about the user is '+response);
     res.redirect('/dashboard')
   }})
 
 })
+//Download Important Files Route
+app.get('/dashboard/download',(req,res)=>{
+res.sendFile('views/sub/downloads.html',{root:__dirname})
+})
+app.get('/dashboard/placement',(req,res)=>{
+    profile.placement(res);
+})
+app.get('/dashboard/intern',(req,res)=>{
+  profile.intern(res);
+})
+app.get('/dashboard/policies',(req,res)=>{
+  profile.policies(res);
+})
+app.get('/dashboard/forms',(req,res)=>{
+  profile.forms(res);
+})
+
+
 //Logout Path
 app.get('/logout',(req,res)=>{
   req.session.reset();
