@@ -61,3 +61,23 @@ div.message.warning{background: #E74;}
 div.message.success{background: #5A6;}
 div.message.announcement{background: #EA0;}
 div.message.error{background: #C43;}
+
+.homepage{
+  position:relative;
+  margin:0 auto;
+  height:20px;
+  width:300px;
+  box-sizing: border-box;
+
+  text-align: center;
+
+}
+#home{
+  position: absolute;
+  margin:0 auto;
+  font-family: "Roboto Condensed",sans-serif;
+  font-weight: bold;
+font-size: 24px;
+
+
+}

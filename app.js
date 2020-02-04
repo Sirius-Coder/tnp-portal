@@ -8,6 +8,7 @@ const queryString=require('query-string')
 const bodyParser=require('body-parser')
 var sessions=require('client-sessions')
 var hash=require('./routes/hash')
+const updater=require('./routes/updater')
 const multer = require('multer')
 const mongoose=require('mongoose')
 const profile=require('./routes/download-handler')
@@ -36,7 +37,7 @@ const storage1=multer.diskStorage({
 const storage=multer.diskStorage({
   destination:'./public/uploads/',
   filename:function(req,file,cb){
-    cb(null,file.fieldname +path.extname(file.originalname))
+    cb(null,file.fieldname +'-'+req.session.user.name+path.extname(file.originalname))
   }
 })
 
@@ -106,7 +107,7 @@ app.get('/dashboard',requireLogin,(req,res)=>{
 
     res.render('dashboard',{
       name:req.session.user.name,
-    image:'/uploads/image.jpg',
+    image:`/uploads/image-${req.session.user.name}.jpg`,
     cpi:req.session.user.cpi,
   Internexp:req.session.user.Internexp,
 Internchoice:req.session.user.Internchoice})
@@ -127,13 +128,15 @@ app.post('/signup',(req,res)=>{
   })
   if(user.password!= user.confpassword)
   res.status(400).json({message:'Both Passwords dont Match'})
-  user.save((err,response)=>{
+
+    user.save((err,response)=>{
     if(err)
     res.status(400).send('Signup Failed'+err)
 else {
     res.status(200).render('sub/Signupsuccesfull')}
   })
-})
+}
+)
 
 app.post('/login',(req,res)=>{
   model.findOne({username:req.body.username},(err,response)=>{
@@ -241,13 +244,7 @@ app.get('/dashboard/details',(req,res)=>{
 res.sendFile('sub/details.html',{root:path.join(__dirname,'views')})
 })
 app.post('/dashboard/details',(req,res)=>{
-  model.findOneAndUpdate({"username":req.session.user.username},{$set:{"cpi":req.body.cpi,"Internexp":req.body.Internexp,"Internchoice":req.body.Internchoice}},{new:true},(err,response)=>{
-    if(err)
-    console.log('An error occured while adding user information'+err);
-    if(response){
-    console.log('The new updated information about the user is '+response);
-    res.redirect('/dashboard')
-  }})
+updater.updater(req,res,model)
 
 })
 //Download Important Files Route
