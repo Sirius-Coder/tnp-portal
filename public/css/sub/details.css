@@ -10,7 +10,7 @@ body 				 { background:url(https://scotch.io/wp-content/uploads/2014/07/61.jpg);
   background:#FFF;
   padding:10px 50px 50px;
   border: 5px solid black;
-  border-radius: 30px;
+  border-radius: 50px;
   font-weight: 300px;
 }
 .heading{
@@ -214,4 +214,25 @@ button {
   text-align: center;
   color: #fff;
   font-weight: bold;
+}
+.instruction{
+  width: 200px;
+  height: 200px;
+  display: block;
+  position: absolute;
+  left:5px;
+  top: 200px;
+  border:2px solid black;
+  border-radius: 50%;;
+  font-family: "Roboto",sans-serif;
+  font-weight: bold;
+  text-align: left;
+  align-items: center;
+  content: normal;
+  padding: 50px 10px 10px 20px;
+}
+ul{
+  text-align: center;
+
+
 }

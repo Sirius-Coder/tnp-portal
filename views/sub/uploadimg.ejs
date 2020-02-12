@@ -2,35 +2,23 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Upload Your Pic</title>
-    <link rel="stylesheet" href="/css/sub/uploadimg.css">
+    <title>Change Your Pic </title>
+    <link rel="stylesheet" href="/css/sub/upload.css">
   </head>
   <body>
-    <div class="wrapper">
-    	<div class="container">
-    		<h1>Change Your Pic!</h1>
-       <%= typeof msg!= 'undefined' ? msg:'' %>
-    		<form class="form" action="/dashboard/uploadimg" method="post" enctype="multipart/form-data" >
+    <div class="main-container ">
+      <div class="heading">
+        <h1>Change Your Profile Pic!</h1>
+        <%= typeof msg!= 'undefined' ? msg:'' %>
+      </div>
+      <form class="" action="/dashboard/uploadimg" method="post" enctype="multipart/form-data">
+        <div class="form-data">
+          <input type="file" name="image" placeholder="Upload Your Profile Pic">
 
-    			<input type="file" name="image"placeholder="Upload Your Profile Pic">
-    			<button type="submit" id="login-button">Upload</button><br>
-            <a class="back-link" href="/dashboard" >Back to Dashboard</a>
-    		</form>
-
-    	</div>
-
-    	<ul class="bg-bubbles">
-    		<li></li>
-    		<li></li>
-    		<li></li>
-    		<li></li>
-    		<li></li>
-    		<li></li>
-    		<li></li>
-    		<li></li>
-    		<li></li>
-    		<li></li>
-    	</ul>
+        </div>
+        <button type="submit" name="button" class="btn">Submit</button>
+      </form>
+    <a class="back-link" href="/dashboard">Back to Dashboard</a>
     </div>
   </body>
 </html>

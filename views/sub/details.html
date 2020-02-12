@@ -6,9 +6,15 @@
     <link rel="stylesheet" href="/css/sub/details.css">
   </head>
   <body>
-    <div class="container">
 
+    <div class="instruction">
+
+      <p>  Enter your Details or Update any specific field</p>
+
+    </div>
+    <div class="container">
   <h1 class="heading">Update Your Details</h1>
+
 
   <form method="post" action="/dashboard/details" >
 <h2>Academic Performance</h2>
@@ -30,18 +36,24 @@
       <span class="bar"></span>
       <label>Class 12th %</label>
     </div>
+    <div class="group">
+      <input type="text" name="jeerank">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>JEE Advanced Rank (eg.12014 CRL,1214 OBC etc)</label>
+    </div>
 <h2>Skills</h2>
 <div class="group">
   <input type="" name="software">
   <span class="highlight"></span>
   <span class="bar"></span>
-  <label>Softwares Known</label>
+  <label>Softwares/languages Known(Each sep by a Comma)</label>
 </div>
 <div class="group">
   <input type="" name="personalskills">
   <span class="highlight"></span>
   <span class="bar"></span>
-  <label>Personal Skills</label>
+  <label>Personal Skills(Each sep by a Comma)</label>
 </div>
 <h2>Internship Experience</h2>
     <div class="group">

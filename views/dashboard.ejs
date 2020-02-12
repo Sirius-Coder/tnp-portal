@@ -10,12 +10,15 @@
     <div class="main-container">
 
     <div class="welcome-message">
-      <h1>Welcome to the Dashboard ||<%- name %>|| </h1>
-      <div class="user-info">
-        <h1>My Cpi is :<%= cpi%> </h1>
-        <h1>My Internship experience is :<%= Internexp%> </h1>
-        <h1>My Intern Choice  is: <%= Internchoice%> </h1>
+      <p class="script">Welcome to the Dashboard</p><p class="shadow "><%- name %> </p>
 
+      <div class="user-info">
+        <h2>My Cpi is :<%= cpi%> </h2>
+        <h2>My Internship experience is :<%= Internexp%> </h2>
+        <h2>My Intern Preferences  are:</h2><h2> *<%= internpref1%>* </h2>
+                                    <h2>*<%= internpref2%>*</h2>
+                                    <h2>*<%= internpref3%>*</h2>
+                                    <h2>*<%= internpref4%>*</h2>
       </div>
     </div>
 
@@ -23,7 +26,7 @@
 
 <div class="middle">
   <div class="dp">
-    <img src="<%=image %>" alt="Please upload your Profile Pic" />
+    <img src="<%=image %>" alt="Profile Pic not found / Please Update your Profile Pic" />
       <br>
   </div>
   <br>
@@ -50,14 +53,40 @@
   <a href="/dashboard/changepw">Change Password</a>
 </div>
     </li>
+    <li class="item" id="contact">
+<a href="#contact" class="btn"><i class="fas fa-cog"></i>Feedback</a>
+<div class="smenu">
+  <a href="/dashboard/feedback">Give Your Suggestions</a>
+</div>
+    </li>
 
-    <li class="item">
-      <a href="/logout" class="btn"><i class="fas fa-sign-out-alt"></i>Logout</a>
+
+    <li class="item" id="logout">
+      <a href="#" class="btn"><i class="fas fa-sign-out-alt"></i>Logout</a>
+
 </li>
 </div>
 </div>
 </div>
+<div class="news-section">
+  <h2 id="news-heading">NEWS SECTION</h2>
+  <marquee direction="left"  scrollamount="4" vspace="10">
+  *This is a Sample Lorem ipsum*
+  </marquee>
+  <marquee direction="left"  scrollamount="6" vspace="10">
+  *This is a Sample Lorem ipsum*
+  </marquee>
+  <marquee direction="left"  scrollamount="5" vspace="10">
+  *This is a Sample Lorem ipsum*
+  </marquee>
+  <marquee direction="left"  scrollamount="4" vspace="10">
+  *This is a Sample Lorem ipsum*
+  </marquee>
+  <marquee direction="left"  scrollamount="6" vspace="10">
+  *This is a Sample Lorem ipsum*
+  </marquee>
 
+</div>
 
   </body>
 </html>

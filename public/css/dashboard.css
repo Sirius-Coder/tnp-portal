@@ -1,39 +1,47 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url("https://fonts.googleapis.com/css?family=Orbitron&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Seaweed+Script');
 *{
-  margin-left: 0;
-  padding: 0;
-font-family: 'Roboto';
+
   list-style: none;
-  text-decoration: none;
+
   font-weight: lighter;
+
 }
 body{
-background-image:url("../back1.jpg");
+background-color: #192a56;
 
+height: auto;
+width: auto;
 }
-.main-container{
 
-
-  border: 1px red solid;
-}
 .welcome-message{
-
+width: 500px;
+height: auto;
 position: absolute;
-border: 1px red solid;
-
+border: 3px black solid;
+border-radius: 30px;
 left:35%;
 }
  .middle{
-  position: absolute;
-  top: 40%;
-  left: 10%;
+   width: 300px;
+   height: 600px;
+    position: absolute;
+  top: 50%;
+  left: 160px;;
   transform: translate(-50%,-50%);
-border: 1px red solid;
+background-color: #fbc531;
+border-radius: 50px;
+border:3px black solid;
+
 }
 .menu{
   width: 300px;
   border-radius: 8px;
   overflow:hidden;
+  font-family: 'Roboto',sans-serif;
+color: black;
+
 }
 .item{
   border-top: 1px solid #2980b9;
@@ -42,8 +50,10 @@ border: 1px red solid;
 .btn{
   display: block;
   padding:16px 20px;
-  background: #3498db;
-  color:white;
+  background: #fbc531;
+  color:black;
+  font-family: 'Roboto',sans-serif;
+
 }
 .btn::before{
   content:"";
@@ -99,18 +109,70 @@ opacity: 1;
   overflow:hidden;
   border-radius: 50%;
   top: 1%;
-  border: 1px red solid;
+  border: 2px red solid;
   display: flex;
+  left: 15%;
+
 
 }
 .dp img{
   width:100%;
   height:auto;
-  flex-shrink: 0;
+  left: 30px;
 }
 .user-info{
   position: absolute;
+  top:200px;
+  left:0px;
+color: white;
+  font-family: 'Roboto',sans-serif;
+  border:3px black solid;
+  border-radius: 30px;
+text-align: center;
+}
+.script {
+  font-family: "Seaweed Script";
+  color: white;
+  text-align: center;
+  font-size: 40px;
+  position: relative;
+  margin:0;
+}
+.shadow {
+  color: #eb2f06;
+  font-family: 'Orbitron',sans-serif;
+  font-weight: bold;
+  text-shadow:
+    -3px -3px 0 #222,
+    3px -3px 0 #222,
+    -3px 3px 0 #222,
+    3px 3px 0 #222,
+    4px 4px 0 #fff,
+    5px 5px 0 #fff,
+    6px 6px 0 #fff,
+    7px 7px 0 #fff;
+  line-height: 0.8em;
+  letter-spacing: 0.1em;
+  transform: scaleY(0.7);
+  -webkit-transform: scaleY(0.7);
+  -moz-transform: scaleY(0.7);
+  margin:0;
+  text-align: center;
+  font-size: 50px;
+}
+.news-section{
+  height:600px;
+  width:400px;
+  position: absolute;
+  right:30px;
   top:100px;
-  left:30px;
-  border:1px red solid;
+  border:5px black solid;
+  border-radius: 50px;
+  font-family: 'Roboto',sans-serif;
+  font-size: 20px;
+  color: white;
+
+}
+#news-heading{
+  text-align: center;
 }

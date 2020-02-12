@@ -2,11 +2,12 @@ html, body {
  margin: 0;
  padding: 0;
  width: 100%;
+ border-radius: 50%;
 }
 
 body {
  height: 100vh;
- background: #151516 ;
+ background: #ece9e3 ;
 }
 
 button {
@@ -18,7 +19,7 @@ button {
 
 button {
  background: none;
- color: #ccc;
+ color: #black;
  width: 240px;
  height: 80px;
  border: 3px solid #39ff14;
@@ -99,7 +100,7 @@ h1{
   font-family: 'Roboto Condensed',sans-serif;
   font-weight: bolder;
   font-size: 80px;
-  color: white;
+  color: black;
   word-spacing: 20px;
 }
 .homepage{
@@ -112,6 +113,6 @@ h1{
   font-size: 20px;
   font-family: "Roboto",sans-serif;
   font-weight: bold;
-  color:white;
+  color:black;
   bottom: 20px;
 }

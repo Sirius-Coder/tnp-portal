@@ -20,6 +20,11 @@ exports.updater=(req,res,model)=>{
     model.findOneAndUpdate({"username":req.session.user.username},{$set:{"boardmarks":req.body.boardmarks}},(err,response)=>{
     })
   }
+  if(req.body.jeerank!='')
+  {
+    model.findOneAndUpdate({"username":req.session.user.username},{$set:{"jeerank":req.body.jeerank}},(err,response)=>{
+    })
+  }
   if(req.body.metricmarks!='')
   {
     model.findOneAndUpdate({"username":req.session.user.username},{$set:{"metricmarks":req.body.metricmarks}},(err,response)=>{

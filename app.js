@@ -31,13 +31,13 @@ app.use(express.static(path.join(__dirname,'/public')))
 const storage1=multer.diskStorage({
   destination:'./public/uploads/',
   filename:function(req,file,cb){
-    cb(null,file.fieldname +'-'+req.session.user.name+ path.extname(file.originalname))
+    cb(null,file.fieldname +'-'+req.session.user.username+ path.extname(file.originalname))
   }
 })
 const storage=multer.diskStorage({
   destination:'./public/uploads/',
   filename:function(req,file,cb){
-    cb(null,file.fieldname +'-'+req.session.user.name+path.extname(file.originalname))
+    cb(null,file.fieldname +'-'+req.session.user.username+path.extname(file.originalname))
   }
 })
 
@@ -70,7 +70,7 @@ checkFileType=(file,cb)=>{
 }
 //HOMEPAGE Route
 app.get('/',(req,res)=>{
-  res.sendFile('C:/Users/acer/Desktop/Portal/views/index.html')
+  res.sendFile('views/index.html',({root:__dirname}))
 })
 //Login Route
 app.get('/login',(req,res)=>{
@@ -104,13 +104,16 @@ requireLogin=(req,res,next)=>{
   }
 }
 app.get('/dashboard',requireLogin,(req,res)=>{
-
+var profileStatus
     res.render('dashboard',{
       name:req.session.user.name,
-    image:`/uploads/image-${req.session.user.name}.jpg`,
+    image:`/uploads/image-${req.session.user.username}.jpg`,
     cpi:req.session.user.cpi,
   Internexp:req.session.user.Internexp,
-Internchoice:req.session.user.Internchoice})
+internpref1:req.session.user.internpref1,
+internpref2:req.session.user.internpref2,
+internpref3:req.session.user.internpref3,
+internpref4:req.session.user.internpref4,})
 })
 
 
@@ -122,6 +125,7 @@ app.post('/signup',(req,res)=>{
   const user = new model({
     name:req.body.name,
     email:req.body.email,
+    rollno:req.body.rollno,
     username:req.body.username,
     password:req.body.password,
     confpassword:req.body.confpassword

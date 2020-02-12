@@ -19,6 +19,9 @@ const Schema = new mongoose.Schema({
   email: {
     type: String,
   },
+  rollno:{
+    type:String,
+  },
   username: {
       type: String,
       unique:true
@@ -41,10 +44,7 @@ const Schema = new mongoose.Schema({
       type:String,
       default:'Not Entered'
     },
-    Internchoice:{
-      type:String,
-      default:'Not Entered'
-    },
+
     metricmarks:{
       type:String,
       default:'Not Entered'
@@ -54,7 +54,8 @@ const Schema = new mongoose.Schema({
       default:'Not Entered'
     },
     jeerank:{
-      type:Number
+      type:String,
+      default:'Not Entered'
     },
     internpref1:{
       type:String,
@@ -73,10 +74,12 @@ const Schema = new mongoose.Schema({
       default:'Not Entered'
     },
     software:{
-      type:Array
+      type:String,
+      default:'Not Entered'
     },
     personalskills:{
-      type:Array
+      type:String,
+      default:'Not Entered'
     }
 
 })
