@@ -13,7 +13,7 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  background: #34ace0;
+  background: black;
   text-align: center;
   border-radius: 20px;
   display: flex;
@@ -29,7 +29,7 @@ flex:2;
 }
 .btn{
   background: none;
-  border :2px solid #000;
+  border :2px solid white;
   font-family:"Montserrat";
   text-transform: uppercase;
   padding:12px 20px;
@@ -39,6 +39,7 @@ flex:2;
   transition: color 0.4s linear;
   position: relative;
   flex:1;
+  color: white;
 
 }
 .btn:hover{

@@ -109,10 +109,10 @@ opacity: 1;
   overflow:hidden;
   border-radius: 50%;
   top: 1%;
-  border: 2px red solid;
-  display: flex;
-  left: 15%;
+  border: 2px black solid;
 
+  left: 15%;
+text-align: center;
 
 }
 .dp img{
@@ -161,7 +161,7 @@ text-align: center;
   font-size: 50px;
 }
 .news-section{
-  height:600px;
+  height:400px;
   width:400px;
   position: absolute;
   right:30px;

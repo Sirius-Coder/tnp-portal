@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var bcrypt=require('bcryptjs')
 let SALT=10;
-mongoose.connect('mongodb://localhost:27017/Portal',{useNewUrlParser: true})
+mongoose.connect('mongodb://localhost:27017/Portal',{useNewUrlParser: true},{useUnifiedTopology: true})
 const db =mongoose.connection
 db.once('open',()=>{
   console.log('Database Connection Established');

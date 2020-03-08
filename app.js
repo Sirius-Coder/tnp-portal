@@ -131,11 +131,11 @@ app.post('/signup',(req,res)=>{
     confpassword:req.body.confpassword
   })
   if(user.password!= user.confpassword)
-  res.status(400).json({message:'Both Passwords dont Match'})
+  res.render('error',{error:'Both passwords dont Match'})
 
     user.save((err,response)=>{
     if(err)
-    res.status(400).send('Signup Failed'+err)
+    res.render('error',{error:err})
 else {
     res.status(200).render('sub/Signupsuccesfull')}
   })
@@ -145,8 +145,8 @@ else {
 app.post('/login',(req,res)=>{
   model.findOne({username:req.body.username},(err,response)=>{
     if(!response){
-    res.json({message:'<h1>Login failed ,User not Found</h1>'})
-    res.redirect('/login')
+    // res.json({message:'<h1>Login failed ,User not Found</h1>'})
+    res.render('error',{error:err})
 
 }
 
@@ -154,7 +154,7 @@ app.post('/login',(req,res)=>{
       if(err)
       throw(err)
       if(!isMatch)
-      res.status(400).json({message:"Wrong Password"})
+      res.render('error',{error:'Wrong password'})
       if(isMatch){
         req.session.user=response;
         res.redirect('/dashboard')
